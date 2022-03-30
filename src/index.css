@@ -6,7 +6,9 @@
 body {
   background-color: black;
 }
-
+.swal2-popup {
+  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif !important;
+}
 .layout {
   height: 100vh;
   max-width: 500px;

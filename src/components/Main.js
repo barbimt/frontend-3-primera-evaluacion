@@ -20,7 +20,7 @@ export default class Main extends React.Component {
   }
 
   componentDidUpdate(_, prevState) {
-    if (!(prevState === null)) {
+    if (!(prevState === null) && this.state.opcionAnterior !== "") {
       this.state.historial.push(this.state.opcionAnterior);
       console.log(this.state.historial);
     }
