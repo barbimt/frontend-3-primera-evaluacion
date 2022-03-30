@@ -11,6 +11,7 @@ const ESTADO_INICIAL = {
   historia: data[0].historia,
   historial: [],
   opcionAnterior: "",
+  mensajeBienvenida: "Elije tu propia aventura!",
 };
 
 export default class Main extends React.Component {
@@ -22,16 +23,19 @@ export default class Main extends React.Component {
   componentDidUpdate(_, prevState) {
     if (!(prevState === null) && this.state.opcionAnterior !== "") {
       this.state.historial.push(this.state.opcionAnterior);
-      console.log(this.state.historial);
     }
   }
+
   componentDidMount() {
-    console.log("se ejeucto componentdidmount");
+    this.mostrarMensajeBienvenida();
   }
 
-  componentWillUnmount() {
-    console.log("se ejeucto componentWillUnmount");
-  }
+  mostrarMensajeBienvenida = () => {
+    Swal.fire({
+      text: this.state.mensajeBienvenida,
+      confirmButtonText: "EMPEZAR!",
+    });
+  };
 
   mostrarModal = () => {
     Swal.fire({
@@ -45,11 +49,13 @@ export default class Main extends React.Component {
   };
 
   reiniciarHistoria = () => {
-    // ESTADO_INICIAL.historial = [];
-    this.setState({ ...ESTADO_INICIAL, historial: [] });
-    console.log("se ejecuto reiniciar historia");
-    console.log("- state: " + JSON.stringify(this.state));
-    console.log("_estadoinicial: " + JSON.stringify(ESTADO_INICIAL));
+    this.setState({
+      ...ESTADO_INICIAL,
+      historial: [],
+      mensajeBienvenida: "Aqui vamos de nuevo..",
+    });
+
+    this.mostrarMensajeBienvenida();
   };
 
   seleccionarOpcion = (boton) => {
